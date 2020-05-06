@@ -1,0 +1,9 @@
+#delicon:hover+#uploadImage{
+    opacity:0.5
+
+}
+
+#delicon{
+    z-index:1;
+
+}
