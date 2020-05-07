@@ -3,7 +3,7 @@ import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 import { Drawer, Button, Icon } from "antd";
 import "./Sections/Navbar.css";
-
+const { CloseOutlined } = Icon;
 function NavBar() {
   const [visible, setVisible] = useState(false);
 
@@ -20,6 +20,15 @@ function NavBar() {
       className="menu"
       style={{ position: "fixed", zIndex: 5, width: "100%" }}
     >
+      <Button
+        className="menu__mobile-button"
+        type="primary"
+        onClick={showDrawer}
+        style={{ float: "left", marginRight: "20px" }}
+      >
+        <Icon type="align-left" />
+      </Button>
+
       <div className="menu__logo">
         <a href="/">Arizon</a>
       </div>
@@ -29,17 +38,12 @@ function NavBar() {
         </div>
         <div className="menu_rigth">
           <RightMenu mode="horizontal" />
+          {/* <CloseOutlined /> */}
         </div>
-        <Button
-          className="menu__mobile-button"
-          type="primary"
-          onClick={showDrawer}
-        >
-          <Icon type="align-right" />
-        </Button>
+
         <Drawer
           title="Basic Drawer"
-          placement="right"
+          placement="left"
           className="menu_drawer"
           closable={false}
           onClose={onClose}
