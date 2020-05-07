@@ -38,22 +38,23 @@ export const UploadProduct = ({
     dispatch({
       type: "REGISTER_FAIL",
     });
-    alert("Failed!! retry")
+    alert("Failed!! retry");
   }
 };
 // get posts
-export const getProducts = () => async (dispatch) => {
-	try {
-		const res = await axios.get('/api/product/getProducts');
+export const getProducts = (skip, limit) => async (dispatch) => {
+  const body = { skip, limit };
+  try {
+    const res = await axios.get("/api/product/getProducts", body);
 
-		dispatch({
-			type: 'GET_PRODUCTS',
-			payload: res.data,
-		});
-	} catch (err) {
-		dispatch({
-			type: 'POSTS_ERR',
-			payload: { msg: err.message },
-		});
-	}
+    dispatch({
+      type: "GET_PRODUCTS",
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: "POSTS_ERR",
+      payload: { msg: err.message },
+    });
+  }
 };

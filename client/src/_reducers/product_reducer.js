@@ -23,6 +23,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         products: payload,
+
         loading: false,
       };
     default:

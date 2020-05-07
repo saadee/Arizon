@@ -65,8 +65,14 @@ router.post("/uploadProduct", auth, async (req, res) => {
 });
 
 router.get("/getProducts", async (req, res) => {
+  let order = req.body.order ? req.body.order : "desc";
+  let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+  let skip = parseInt(req.body.skip);
+  let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   try {
-    const products = await Product.find();
+    const products = await Product.find()
+      // .skip(req.body.skip)
+      // .limit(req.body.limit);
     res.json(products);
   } catch (err) {
     console.error(err.message);
