@@ -3,7 +3,10 @@ import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 import { Drawer, Button, Icon } from "antd";
 import "./Sections/Navbar.css";
+import logo from './logo2.png'
+import { Link } from 'react-router-dom'
 const { CloseOutlined } = Icon;
+
 function NavBar() {
   const [visible, setVisible] = useState(false);
 
@@ -29,10 +32,11 @@ function NavBar() {
         <Icon type="align-left" />
       </Button>
 
-      <div className="menu__logo">
-        <a href="/">Arizon</a>
+      <div className="menu__logo" style={{ textAlign: 'left', marginLeft: '0px' }}>
+        <a href='/'>
+          <img src={logo} alt="" style={{ width: '100%', height: '50px', marginTop: '-10px' }} /></a>
       </div>
-      <div className="menu__container">
+      <div className="menu__container" style={{ marginLeft: '0px' }}>
         <div className="menu_left">
           <LeftMenu mode="horizontal" />
         </div>

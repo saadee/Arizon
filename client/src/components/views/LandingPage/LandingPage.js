@@ -13,7 +13,7 @@ const LandingPage = ({ product: { products, loading }, getProducts }) => {
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
   const renderCards = products.map((product, index) => (
-    <Col lg={6} md={8} sm={12} xs={24}>
+    <Col lg={6} md={8} sm={12} xs={12}>
       <Card
         hoverable={true}
         // loading={true}
@@ -39,11 +39,6 @@ const LandingPage = ({ product: { products, loading }, getProducts }) => {
   };
   return (
     <div style={{ margin: "3rem auto", width: "90%" }}>
-      <div style={{ textAlign: "center" }}>
-        <h2>
-          Website is under Construction.. <Icon type="rocket" />
-        </h2>
-      </div>
       {/* {filter} */}
       {/* {Search} */}
 
@@ -56,8 +51,7 @@ const LandingPage = ({ product: { products, loading }, getProducts }) => {
             alignItems: "center",
           }}
         >
-          <h2>No Products yet...</h2>
-          <Spin size="large"></Spin>
+          <Spin size="large"  style={{fontSize:'100px',margin:'auto'}}></Spin>
         </div>
       ) : (
         <div>
