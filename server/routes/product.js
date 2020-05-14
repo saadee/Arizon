@@ -50,6 +50,7 @@ router.post("/uploadProduct", auth, async (req, res) => {
   try {
     const newProduct = new Product({
       category: req.body.category,
+      subcategory: req.body.subcategory,
       description: req.body.description,
       price: req.body.price,
       title: req.body.title,
@@ -64,16 +65,29 @@ router.post("/uploadProduct", auth, async (req, res) => {
   }
 });
 
-router.get("/getProducts", async (req, res) => {
+router.post("/getProducts", async (req, res) => {
   let order = req.body.order ? req.body.order : "desc";
   let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
-  let skip = parseInt(req.body.skip);
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
+  let skip = parseInt(req.body.skip);
+  console.log("Skip  " + req.body.skip);
+  console.log("Limit  " + req.body.limit);
+  let findArgs = {};
+  // console.log(req.body.filters);
+  for (let key in req.body.filters) {
+    if (req.body.filters[key].length > 0) {
+      if (key === "price") {
+      } else {
+        findArgs[key] = req.body.filters[key];
+      }
+    }
+  }
   try {
     const products = await Product.find()
-      // .skip(req.body.skip)
-      // .limit(req.body.limit);
-    res.json(products);
+      .sort([[sortBy, order]])
+      .skip(skip)
+      .limit(12);
+    res.json({products});
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

@@ -33,7 +33,7 @@ function RightMenu(props) {
 		);
 	} else {
 		return (
-			<Menu mode={props.mode}>
+			<Menu  mode={props.mode}>
 				<Menu.Item key="upload">
 					<Link to="/product/upload">Upload</Link>
 				</Menu.Item>

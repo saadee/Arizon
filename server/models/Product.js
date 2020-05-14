@@ -24,6 +24,10 @@ const productSchema = mongoose.Schema(
     category: {
       type: String,
     },
+    subcategory: {
+      type: String,
+    },
+
     sold: {
       type: Number,
       maxlength: 100,

@@ -4,7 +4,7 @@ import Carousel from '../Carousel/Carousel'
 
 function HomePage(props) {
     return (
-        <div style={{ margin: ' auto ', width: '100%', maxHeight: '400px', height: '400px' }}>
+        <div style={{ margin: ' auto ', width: '100%', maxHeight: '450px', height: '450px',border:'1px solid red' }}>
             <Carousel />
         </div>
     );

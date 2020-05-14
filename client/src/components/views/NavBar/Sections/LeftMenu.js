@@ -7,7 +7,7 @@ const MenuItemGroup = Menu.ItemGroup;
 
 function LeftMenu(props) {
   return (
-    <Menu mode={props.mode}>
+    <Menu  mode={props.mode}>
       <SubMenu
         title={
           <span style={{ fontWeight: "bolder", fontSize: "1rem" }}>Men</span>

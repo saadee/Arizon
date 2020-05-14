@@ -23,8 +23,9 @@ export const UploadProduct = ({
   price,
   category,
   images,
+  subcategory,
 }) => async (dispatch) => {
-  const body = { title, description, price, category, images };
+  const body = { title, description, price, category, images, subcategory };
   try {
     console.log("Body", body);
     const res = await axios.post("/api/product/uploadProduct", body);
@@ -42,10 +43,11 @@ export const UploadProduct = ({
   }
 };
 // get posts
-export const getProducts = (skip, limit) => async (dispatch) => {
-  const body = { skip, limit };
+
+export const getProducts = (variable) => async (dispatch) => {
+ 
   try {
-    const res = await axios.get("/api/product/getProducts", body);
+    const res = await axios.post("/api/product/getProducts", variable);
 
     dispatch({
       type: "GET_PRODUCTS",

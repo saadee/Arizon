@@ -1,18 +1,13 @@
 const initialState = {
-  images: [],
   products: [],
+  Skip: 0,
+  Limit: 12,
   loading: true,
 };
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case "UPLOAD_IMAGE":
-      return {
-        ...state,
-        images: payload,
-        loading: false,
-      };
     case "PRODUCT_UPLAODED":
       return {
         ...state,
@@ -20,10 +15,11 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case "GET_PRODUCTS":
+     let newProducts= state.products.concat(payload)
       return {
         ...state,
-        products: payload,
-
+        products: newProducts,
+        Skip: 12,
         loading: false,
       };
     default:
