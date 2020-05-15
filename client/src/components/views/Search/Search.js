@@ -8,6 +8,7 @@ function SearchBox(props) {
   const onChangeSearch = (e) => {
     setSearch(e.currentTarget.value);
     props.refreshFunction(e.currentTarget.value);
+    // console.log(e.currentTarget.value)
   };
   return (
     <div>

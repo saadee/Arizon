@@ -6,7 +6,9 @@ import { getProducts } from "../../../_actions/product_action";
 import { Icon, Row, Col, Card, Spin } from "antd";
 import RadioBox from "../RadioBox/RadioBox";
 import SearchBox from "../Search/Search";
-import price from '../RadioBox/PriceData'
+import Price from '../RadioBox/PriceData'
+
+import { Link } from 'react-router-dom'
 
 const { Meta } = Card;
 
@@ -28,6 +30,12 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
     getProducts(variable);
   }, [getProducts]);
 
+
+  useEffect(() => {
+    setProducts(products);
+  }, [products]);
+
+
   const onLoad = (e) => {
 
     let variable = {
@@ -46,19 +54,24 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
     getProducts(variable);
     // setSkip(0);
   };
+  // console.log(Price)
+
   const handlePrice = (value) => {
-    const data = price
+    const data = Price
+
     let array = []
     for (let key in data) {
-      // console.log('key', key)
+      alert("j")
+      console.log('key', key)
       // console.log('value', value)
 
       if (data[key]._id === parseInt(value, 10)) {
-        array = data[key].name
-        console.log("arr", array)
+        array = data[key].array
+
 
       }
     }
+    console.log("arr", array)
     return array
   }
   const handleFilters = (filters, category) => {
@@ -74,11 +87,37 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
   };
 
   const updateSearchItems = (newSearchItems) => {
-    setSearchItems(newSearchItems)
+    // this.setState({
+    //   searchword: e.target.value,
+    // });
+    // setSearchItems(newSearchItems)
+    // const products = products;
+    console.log("products", products)
+    const filtereditem = products.filter((p) =>
+      p.title.toLowerCase().includes(newSearchItems.toLowerCase())
+    );
+    console.log("item", filtereditem);
+    // this.setState({
+    //   todos: filtereditem,
+    // });
+    // getProducts(filtereditem)
+    setProducts(filtereditem)
+
+    let variable = {
+      skip: 0,
+      limit: Limit,
+      search: newSearchItems
+    };
+
+    getProducts(variable);
   }
   return (
-    <div style={{ margin: "3rem auto", width: "90%" }}>
-      {products.length === 0 ? <div
+    <div style={{ margin: "1rem auto", width: "90%" }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem ' }}>
+        <SearchBox refreshFunction={updateSearchItems} />
+
+      </div>
+      {Products.length === 0 ? <div
         style={{
           justifyContent: "center",
           display: "flex",
@@ -92,35 +131,34 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
         ></Spin>
       </div> :
         <div>
-          <Row gutter={[16, 16]}>
+          {/* <Row gutter={[16, 16]}>
             <Col xs={24}>
-              <RadioBox list={price}
+              <RadioBox list={Price}
                 handleFilters={(filters) => handleFilters(filters, "price")}
               />
             </Col>
-          </Row>
+          </Row> */}
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem ' }}>
-            <SearchBox refreshFunction={updateSearchItems} />
 
-          </div>
           <div>
-            <Row gutter={[16, 16]}>{products.map((product, index) => (
+            <Row gutter={[16, 16]}>{Products.map((product, index) => (
               <Col lg={6} md={8} sm={12} xs={12}>
-                <Card
-                  hoverable={true}
-                  loading={product.images ? false : true}
-                  cover={
-                    <img
-                      src={`http://localhost:5000/${product.images}`}
-                      alt="product image"
-                      style={{ width: "100%", maxHeight: "400px", height: "400px" }}
-                    />
-                  }
-                  bordered={true}
-                >
-                  <Meta title={product.title} description={"$" + product.price}></Meta>
-                </Card>
+                <Link to={`/${product.category}/${product.subcategory}/${product.title}/${product._id}`}>
+                  <Card
+                    hoverable={true}
+                    loading={product.images ? false : true}
+                    cover={
+                      <img
+                        src={`http://localhost:5000/${product.images}`}
+                        alt="product image"
+                        style={{ width: "100%", maxHeight: "400px", height: "400px" }}
+                      />
+                    }
+                    bordered={true}
+                  >
+                    <Meta title={product.title} description={"$" + product.price}></Meta>
+                  </Card>
+                </Link>
               </Col>
             ))}</Row>
           </div>

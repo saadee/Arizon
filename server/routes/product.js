@@ -70,28 +70,66 @@ router.post("/getProducts", async (req, res) => {
   let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = parseInt(req.body.skip);
-  console.log("Skip  " + req.body.skip);
-  console.log("Limit  " + req.body.limit);
+  // console.log("Skip  " + req.body.skip);
+  // console.log("Limit  " + req.body.limit);
   let findArgs = {};
   // console.log(req.body.filters);
-  for (let key in req.body.filters) {
-    if (req.body.filters[key].length > 0) {
-      if (key === "price") {
-      } else {
-        findArgs[key] = req.body.filters[key];
-      }
-    }
-  }
+
+  // for (let key in req.body.filters) {
+  //   if (req.body.filters[key].length > 0) {
+  //     if (key === "price") {
+  //       findArgs[key]={
+  //         $gte=req.body.filters[key][0],
+  //         $lte=req.body.filters[key][1]
+  //       }
+  //     } else {
+  //       findArgs[key] = req.body.filters[key];
+  //     }
+  //   }
+  // }
+
+  let term = req.body.search;
+  // console.log(term);
   try {
-    const products = await Product.find()
-      .sort([[sortBy, order]])
-      .skip(skip)
-      .limit(12);
-    res.json({products});
+    if (term) {
+      const products = await Product
+        .find({ $text: { $search: term } })
+        .sort([[sortBy, order]])
+        .skip(skip)
+        .limit(12);
+      res.json(products);
+    } else {
+      const products = await Product.find()
+        .sort([[sortBy, order]])
+        .skip(skip)
+        .limit(12);
+      res.json(products);
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
+
+// @route   GET api/Product/id
+// @desc    Get Product by ID
+// @access  Publice
+
+router.get('/:id', async (req, res) => {
+	try {
+		const product = await Product.findById(req.params.id);
+		if (!product) {
+			return res.status(400).json({ msg: 'product not Found' });
+		}
+		res.json(product);
+	} catch (err) {
+		console.error(err.message);
+		if (err.kind == 'ObjectId') {
+			return res.status(400).json({ msg: 'Post not Found' });
+		}
+		res.status(500).send('Server Error');
+	}
+});
+
 
 module.exports = router;

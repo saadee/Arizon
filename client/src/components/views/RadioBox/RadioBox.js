@@ -10,7 +10,8 @@ function RadioBox(props) {
   const [Value, setValue] = useState('0')
   const handleChange = (e) => {
     setValue(e.target.value)
-    console.log(e.target.value)
+    // console.log(e.target.value)
+  
   };
   return (
     <div style={{ margin: '1rem auto' }}>
@@ -18,7 +19,7 @@ function RadioBox(props) {
         <Panel header="Price Range" key="1">
           <Radio.Group onChange={e => handleChange(e)} value={Value}>
             {props.list.map((value) => (
-              <Radio key={value._id} value={`${value._id}`}>
+              <Radio key={value._id} value={`${value.array}`}>
                 <span style={{ fontWeight: 'bold' }}> {value.name}</span>
               </Radio>
             ))}

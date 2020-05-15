@@ -60,3 +60,20 @@ export const getProducts = (variable) => async (dispatch) => {
     });
   }
 };
+
+// get post bu id
+export const getProduct = (id) => async (dispatch) => {
+	try {
+		const res = await axios.get(`/api/product/${id}`);
+
+		dispatch({
+			type: 'GET_PRODUCT',
+			payload: res.data,
+		});
+	} catch (err) {
+		dispatch({
+			type: 'POSTS_ERR',
+			payload: { msg: err.message },
+		});
+	}
+};
