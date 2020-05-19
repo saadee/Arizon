@@ -92,8 +92,7 @@ router.post("/getProducts", async (req, res) => {
   // console.log(term);
   try {
     if (term) {
-      const products = await Product
-        .find({ $text: { $search: term } })
+      const products = await Product.find()
         .sort([[sortBy, order]])
         .skip(skip)
         .limit(12);

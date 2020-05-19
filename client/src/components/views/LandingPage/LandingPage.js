@@ -96,20 +96,12 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
     const filtereditem = products.filter((p) =>
       p.title.toLowerCase().includes(newSearchItems.toLowerCase())
     );
-    console.log("item", filtereditem);
+    // console.log("item", filtereditem);
     // this.setState({
     //   todos: filtereditem,
     // });
     // getProducts(filtereditem)
     setProducts(filtereditem)
-
-    let variable = {
-      skip: 0,
-      limit: Limit,
-      search: newSearchItems
-    };
-
-    getProducts(variable);
   }
   return (
     <div style={{ margin: "1rem auto", width: "90%" }}>
@@ -125,10 +117,11 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
           alignItems: "center",
         }}
       >
+
         <Spin
           size="large"
           style={{ fontSize: "100px", margin: "auto" }}
-        ></Spin>
+        > <span style={{ fontSize: '30px', fontWeight: 'bolder',color:'black' }}>No Products Found</span> </Spin>
       </div> :
         <div>
           {/* <Row gutter={[16, 16]}>
@@ -149,7 +142,7 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
                     loading={product.images ? false : true}
                     cover={
                       <img
-                        src={`http://localhost:5000/${product.images}`}
+                        src={`http://localhost:5000/${product.images[0]}`}
                         alt="product image"
                         style={{ width: "100%", maxHeight: "400px", height: "400px" }}
                       />

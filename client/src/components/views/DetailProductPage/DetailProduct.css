@@ -1,0 +1,114 @@
+.grid_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 90vw;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px
+  }
+  .grid_items_icons {
+    margin-top: 20px;
+    width: 280px;
+    margin: 0 5vw;
+  }
+  .ant-tabs .ant-tabs-left-content{
+      padding: 0px !important
+  }
+  .grid_items {
+    flex: 2;
+    box-sizing: border-box;
+    padding: 10px;
+    font-family: serif;
+  
+  }
+  .sizeChart{
+    text-align: left;
+    margin: 1rem;
+  }
+  .item_Description {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 13px;
+  }
+  .item1 {
+    flex: 3;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+  
+  
+  }
+  .item_Name {
+    font-size: 22px;
+    /* font-family: 'BentonSans'; */
+    /* font-weight: "400"; */
+    font-weight: bold;
+    padding: 0;
+    text-align: left;
+    margin: 10px;
+  }
+  .item1 .carousal {
+      width: 60vw
+  }
+  .item1 .carousalimg {
+   height: 70vh;
+    background-repeat: no-repeat !important;
+    background-position: center;
+    margin: 10px 10px 0px 10px;
+    background-size: contain
+  }
+  .item_Price {
+    /* font-family: "Montserrat"; */
+    font-weight: bold;
+    font-size: 20px;
+    color: red;
+    text-align: left  ;
+  }
+  .item_salePrice{
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    margin-right: 10px;
+    text-align: left  ;
+  }
+  .addCart-btn{
+    background-color: black;
+    color: white;
+    width: 100%;
+    padding: 1rem auto;
+    height: 70px;
+    border: 1px solid white;
+    font-size: 20px;
+    /* font-weight: b; */
+  }
+  .addCart-btn:hover{
+    background-color: lightgreen;
+    color: white  ;
+  }
+  @media only screen and (max-width: 740px) {
+    .grid_box {
+      flex-direction: column;
+    }
+    .grid_items {
+      text-align: center;
+      justify-content: center;
+      justify-items: center;
+  
+    }
+    .item1 .carousal {
+      width: 90vw
+    }
+    .ant-tabs-nav .ant-tabs-tab{
+        margin: auto !important
+    }
+    .item1 .carousalimg {
+        height: 400px !important;
+    }
+  
+  }
+  /* @media (max-width:600px){
+      .item1 .carousal {
+          width: 100% !important
+        }
+  } */

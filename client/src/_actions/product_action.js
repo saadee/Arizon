@@ -77,3 +77,18 @@ export const getProduct = (id) => async (dispatch) => {
 		});
 	}
 };
+export const addToCart = (id) => async (dispatch) => {
+	try {
+		const res = await axios.get(`/api/product/${id}`);
+
+		dispatch({
+			type: 'ADD_TO_CART',
+			payload: res.data,
+		});
+	} catch (err) {
+		dispatch({
+			type: 'POSTS_ERR',
+			payload: { msg: err.message },
+		});
+	}
+};
