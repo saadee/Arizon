@@ -1,7 +1,6 @@
 const initialState = {
   products: [],
   product: {},
-  cart: [],
   Skip: 0,
   Limit: 12,
   loading: true,
@@ -28,12 +27,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         product: payload,
-        loading: false,
-      };
-    case "ADD_TO_CART":
-      return {
-        ...state,
-        cart: payload,
         loading: false,
       };
     default:

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import menChart from './Sections/sizecharts/men.webp'
 import womenChart from './Sections/sizecharts/women.webp'
 import boyChart from './Sections/sizecharts/boy.webp'
-import { Icon, Row, Col, Card, Spin, Tabs, Radio, Divider, Button, Modal, Typography } from "antd";
+import {Col, Card, Spin, Tabs, Radio, Divider, Button, Modal, message, Row } from "antd";
 
 const { TabPane } = Tabs;
 
@@ -46,6 +46,11 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
     };
     const addTocartItem = (e) => {
         addToCart(product._id)
+        const key = 'updatable';
+        message.loading({ content: 'Adding Item to Cart...', key });
+        setTimeout(() => {
+            message.success({ content: 'Added!', key, duration: 2 });
+        }, 1000);
     }
     return !product ? (
         <div
@@ -60,18 +65,19 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                 size="large"
             ></Spin>
         </div>
-    ) : (<div style={{ margin: '3rem auto', textAlign: 'center' }}>
+    ) : (<div className="productDetailWrapperDiv" style={{ margin: '3rem auto', textAlign: 'center' }}>
 
-        <div
+        <div className='imageDiv'
             style={{
-                display: 'flex', flex: 'wrap', margin: '-1rem auto', border: '1px '
+                display: '', flex: 'wrap', margin: '-1rem auto', border: '1px '
                 , paddingRight: '2rem', paddingLeft: '2rem'
             }} >
 
-            <Tabs
+            <Tabs className='productImages'
                 defaultActiveKey="1"
                 tabPosition={mode}
                 className="carousal"
+
             >
 
                 <TabPane
@@ -85,7 +91,7 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                     key={1}
                 >
                     <div>
-                        <Card style={{ width: '60%', margin: '1rem auto', height: '70%' }}
+                        <Card className='productImageDiv' style={{ width: '60%', margin: '1rem auto', height: '70%' }}
                             hoverable={true}
                             loading={product.images ? false : true}
                             cover={
@@ -97,6 +103,9 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                             }
                         >
                         </Card>
+
+
+
                     </div>
                 </TabPane>
                 <TabPane
@@ -113,7 +122,7 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                     <div
 
                     >
-                        <Card style={{ width: '60%', margin: '1rem auto', height: '70%' }}
+                        <Card className='productImageDiv' style={{ width: '60%', margin: '1rem auto', height: '70%' }}
                             hoverable={true}
                             loading={product.images ? false : true}
                             cover={
@@ -141,7 +150,7 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                     <div
 
                     >
-                        <Card style={{ width: '60%', margin: '0.2rem auto' }} xs={24} lg={12} md={16} sm={24}
+                        <Card className='productImageDiv' style={{ width: '60%', margin: '0.2rem auto' }} xs={24} lg={12} md={16} sm={24}
                             hoverable={true}
                             loading={product.images ? false : true}
                             cover={
@@ -238,20 +247,27 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                             <Button onClick={showModal}>
                                 Size Chart
         </Button>
-                            <Modal width={800}
-                                title={product.category + " Size Chart"}
-                                visible={state.visible}
-                                onOk={handleOk}
-                                onCancel={handleCancel}
-                                okType={null}
-                                centered={true}
-                            >
-                                <div>
-                                    <img src={product.category == "Mens" ? menChart : womenChart ||
-                                        product.category == 'women' ? womenChart : '' &&
-                                            product.category == 'kids' ? boyChart : ''}
-                                        alt="" style={{ width: '700px' }} /></div>
-                            </Modal>
+                            <Row gutter={[16,16]}>
+                                <Col xs={6}>
+                                <Modal className='sizeChartModal'
+                                    title={product.category + " Size Chart"}
+                                    visible={state.visible}
+                                    onOk={handleOk}
+                                    onCancel={handleCancel}
+                                    okType={null}
+                                    footer={null}
+                                    zIndex={1000}
+                                    width={window.innerWidth>700?800:1000}
+                                    // centered={true}
+                                >
+                                    <div className='sizeChartImageDiv'>
+                                        <img className='sizeChartImage' src={product.category == "Mens" ? menChart : womenChart ||
+                                            product.category == 'women' ? womenChart : '' &&
+                                                product.category == 'kids' ? boyChart : ''}
+                                            alt="" style={{ width: '700px' }} /></div>
+                                </Modal>
+                                </Col>
+                                </Row>
                         </div>
 
                         <button className='addCart-btn'
