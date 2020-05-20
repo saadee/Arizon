@@ -46,11 +46,13 @@
 
 .menu__mobile-button {
   float: right;
-  height: 32px;
+  height: 40px;
   padding: 6px;
+  width: 35px;
   margin-top: 8px;
-  display: none !important; /* use of important to overwrite ant-btn */
-  background: #3e91f7;
+  display: none !important;
+   /* use of important to overwrite ant-btn */
+  /* background: #3e91f7; */
 }
 
 .menu_drawer .ant-drawer-body {

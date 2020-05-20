@@ -22,10 +22,7 @@
     font-family: serif;
   
   }
-  .sizeChart{
-    /* text-align: left; */
-    /* margin: 1rem; */
-  }
+  
   .item_Description {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 13px;
@@ -40,13 +37,13 @@
   
   }
   .item_Name {
-    font-size: 22px;
-    /* font-family: 'BentonSans'; */
+    font-size: 25px;
+    font-family: 'BentonSans';
     /* font-weight: "400"; */
-    font-weight: bold;
+    /* font-weight: bold; */
     padding: 0;
     text-align: left;
-    margin: 10px;
+    /* margin: 10px; */
   }
   .item1 .carousal {
       width: 60vw
@@ -60,14 +57,14 @@
   }
   .item_Price {
     /* font-family: "Montserrat"; */
-    font-weight: bold;
-    font-size: 20px;
-    color: red;
+    /* font-weight: bold; */
+    font-size: 22px;
+    color: orangered;
     text-align: left  ;
   }
   .item_salePrice{
-    font-weight: bold;
-    font-size: 20px;
+    /* font-weight: bold; */
+    font-size: 22px;
     color: black;
     margin-right: 10px;
     text-align: left  ;
@@ -75,19 +72,44 @@
   .addCart-btn{
     background-color: black;
     color: white;
-    width: 100%;
+    width: 150%;
     padding: 1rem auto;
     height: 70px;
-    border: 1px solid white;
+    border: 1px solid black;
     font-size: 20px;
+    cursor: pointer;
     /* font-weight: b; */
   }
   .addCart-btn:hover{
     background-color: lightgreen;
     color: white  ;
+    border: black;
+    text-decoration: none;
   }
   .imageDiv{
     display: flex;
+  }
+  .productImages{
+    margin: 1rem;
+    border: 1px solid red;
+  }
+  .sizeChartImage{
+    width:100%;
+  }
+  .addWishList-btn{
+    background-color: white;
+    color: black;
+    width: 150%;
+    padding: 1rem auto;
+    height: 70px;
+    cursor: pointer;
+    border: 1px solid black;
+    font-size: 20px;
+    margin-top: 1rem;
+  }
+  .addWishList-btn:hover{
+    border:2px solid lightgreen;
+    color: lightgreen;
   }
   @media only screen and (max-width: 740px) {
     .productDetailWrapperDiv{
@@ -136,19 +158,14 @@
     .productDetailWrapperDiv{
       /* margin: 2rem auto; */
       border: 1px solid green;
-      width: 627px;
+      width: 100%;
     }
-.sizeChartModal{
-  position: absolute;
-  width: 30%;
-}
+
  
-    .sizeChartImage{
-      width:20%;
-    }
+    
     .addCart-btn{
       width:'400px';
-      margin-left: 50%;
+      margin-left: 0%;
       text-align: center;
     }
   }

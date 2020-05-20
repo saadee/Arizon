@@ -10,7 +10,7 @@ function LeftMenu(props) {
     <Menu  mode={props.mode}>
       <SubMenu
         title={
-          <span style={{ fontWeight: "bolder", fontSize: "1rem" }}>Men</span>
+          <span style={{ fontWeight: "bold", fontSize: "1rem" }}>Men</span>
         }
       >
         <Menu.Item key="setting:1">

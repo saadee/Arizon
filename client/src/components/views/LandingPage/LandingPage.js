@@ -121,7 +121,7 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
         <Spin
           size="large"
           style={{ fontSize: "100px", margin: "auto" }}
-        > <span style={{ fontSize: '30px', fontWeight: 'bolder',color:'black' }}>No Products Found</span> </Spin>
+        > <span style={{ fontSize: '30px', fontWeight: 'bolder', color: 'black' }}>No Products Found</span> </Spin>
       </div> :
         <div>
           {/* <Row gutter={[16, 16]}>
@@ -149,7 +149,10 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
                     }
                     bordered={true}
                   >
-                    <Meta title={product.title} description={"$" + product.price}></Meta>
+                    <Meta title={product.title} description={
+                      <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black' }}>{'PKR ' + product.price}</span>
+                    }></Meta>
+
                   </Card>
                 </Link>
               </Col>

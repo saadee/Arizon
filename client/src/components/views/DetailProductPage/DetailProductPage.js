@@ -6,15 +6,29 @@ import { connect } from 'react-redux'
 import menChart from './Sections/sizecharts/men.webp'
 import womenChart from './Sections/sizecharts/women.webp'
 import boyChart from './Sections/sizecharts/boy.webp'
-import {Col, Card, Spin, Tabs, Radio, Divider, Button, Modal, message, Row } from "antd";
+import { HeartOutlined } from '@ant-design/icons'
+import { Col, Card, Spin, Tabs, Radio, Divider, Button, Modal, message, Row, Icon } from "antd";
 
 const { TabPane } = Tabs;
+// const { HeartOutlined } = Icon
 
 
 function DetailProductPage({ getProduct, addToCart, product: { product, loading }, match }) {
     useEffect(() => {
         getProduct(match.params.id)
     }, [getProduct])
+    const [Quantity, setQuantity] = useState(1)
+    const add = (e) => {
+        setQuantity(Quantity + 1)
+    }
+    const sub = (e) => {
+        setQuantity(Quantity - 1)
+    }
+    if (Quantity >= 10) {
+     const    key = 'warning'
+        message.warning({ content: 'You Cannot Add More Items...', key });
+        setQuantity(9)
+    }
     const Url = "http://localhost:5000"
     let mode = "left";
     if (window.innerWidth <= 700) {
@@ -91,7 +105,7 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                     key={1}
                 >
                     <div>
-                        <Card className='productImageDiv' style={{ width: '60%', margin: '1rem auto', height: '70%' }}
+                        <Card className='productImageDiv' style={{ width: '80%', margin: '1rem auto', height: '70%' }}
                             hoverable={true}
                             loading={product.images ? false : true}
                             cover={
@@ -122,7 +136,7 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                     <div
 
                     >
-                        <Card className='productImageDiv' style={{ width: '60%', margin: '1rem auto', height: '70%' }}
+                        <Card className='productImageDiv' style={{ width: '80%', margin: '1rem auto', height: '70%' }}
                             hoverable={true}
                             loading={product.images ? false : true}
                             cover={
@@ -150,7 +164,7 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                     <div
 
                     >
-                        <Card className='productImageDiv' style={{ width: '60%', margin: '0.2rem auto' }} xs={24} lg={12} md={16} sm={24}
+                        <Card className='productImageDiv' style={{ width: '80%', margin: '0.2rem auto' }} xs={24} lg={12} md={16} sm={24}
                             hoverable={true}
                             loading={product.images ? false : true}
                             cover={
@@ -167,7 +181,7 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                 </TabPane>
             </Tabs>
 
-            <div style={{ display: 'flex', textAlign: 'left', width: '600px' }}>
+            <div style={{ display: 'flex', textAlign: 'left', width: '600px', marginTop: '1rem' }}>
                 <div className="item_pricing_details">
                     <h1 className="item_Name">{product.title}</h1>
                     <p className="item_Description">{product.description}</p>
@@ -220,7 +234,7 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                             <Button
                                 // disabled={this.state.qnty < 2}
                                 className="btn-1"
-                            // onClick={() => this.subtract(product)}
+                                onClick={(e) => sub(e)}
                             >
                                 -
                         </Button>
@@ -231,43 +245,45 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                                     padding: "0px",
                                     textAlign: "center",
                                     border: "0",
+                                    fontSize: '20px',
+                                    fontWeight: '600'
                                 }}
                                 size="default"
                             >
-                                {/* &nbsp; {this.state.qnty} &nbsp; */}
+                                &nbsp; {Quantity} &nbsp;
                             </span>
                             <Button
                                 className="btn-3"
-                            // onClick={() => this.add(product)}
+                                onClick={(e) => add(e)}
                             >
                                 +
                         </Button>
                         </div>
                         <div className='sizeChart'>
                             <Button onClick={showModal}>
-                                Size Chart
-        </Button>
-                            <Row gutter={[16,16]}>
+                                <span style={{ fontWeight: 'bold' }}>Size Chart</span>
+                            </Button>
+                            <Row gutter={[16, 16]}>
                                 <Col xs={6}>
-                                <Modal className='sizeChartModal'
-                                    title={product.category + " Size Chart"}
-                                    visible={state.visible}
-                                    onOk={handleOk}
-                                    onCancel={handleCancel}
-                                    okType={null}
-                                    footer={null}
-                                    zIndex={1000}
-                                    width={window.innerWidth>700?800:1000}
-                                    // centered={true}
-                                >
-                                    <div className='sizeChartImageDiv'>
-                                        <img className='sizeChartImage' src={product.category == "Mens" ? menChart : womenChart ||
-                                            product.category == 'women' ? womenChart : '' &&
-                                                product.category == 'kids' ? boyChart : ''}
-                                            alt="" style={{ width: '700px' }} /></div>
-                                </Modal>
+                                    <Modal className='sizeChartModal'
+                                        title={product.category + " Size Chart"}
+                                        visible={state.visible}
+                                        onOk={handleOk}
+                                        onCancel={handleCancel}
+                                        okType={null}
+                                        footer={null}
+                                        zIndex={1000}
+                                        width={window.innerWidth > 700 ? 800 : 1000}
+                                        centered={true}
+                                    >
+                                        <div className='sizeChartImageDiv'>
+                                            <img className='sizeChartImage' src={product.category == "Mens" ? menChart : womenChart ||
+                                                product.category == 'women' ? womenChart : '' &&
+                                                    product.category == 'kids' ? boyChart : ''}
+                                                alt="" /></div>
+                                    </Modal>
                                 </Col>
-                                </Row>
+                            </Row>
                         </div>
 
                         <button className='addCart-btn'
@@ -276,6 +292,12 @@ function DetailProductPage({ getProduct, addToCart, product: { product, loading 
                         >
                             Add To Cart
                       </button>
+                        <button className='addWishList-btn'
+
+                        // onClick={e => addTocartItem(e)}
+                        >
+                            <HeartOutlined />  <span></span>  Add To Wish List
+                        </button>
                         <Divider />
                     </div>
                 </div>

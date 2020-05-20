@@ -10,6 +10,7 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
+import CartPage from './views/Cart/Cart'
 //null   Anyone Can go inside
 //true   only logged in user can go inside
 //false  logged in user can't go inside
@@ -27,6 +28,7 @@ function App() {
             component={Auth(DetailProductPage, null)}
           />
           <Route exact path="/" component={Auth(HomePage, null)} />
+          <Route exact path="/cart" component={Auth(CartPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route
