@@ -7,18 +7,24 @@ const MenuItemGroup = Menu.ItemGroup;
 
 function LeftMenu(props) {
   return (
-    <Menu  mode={props.mode}>
+    <Menu mode={props.mode}>
       <SubMenu
         title={
           <span style={{ fontWeight: "bold", fontSize: "1rem" }}>Men</span>
         }
       >
         <Menu.Item key="setting:1">
-          <Link to="/d">Option 1</Link>
+          <Link to="/Mens/Denim">Denim</Link>
         </Menu.Item>
-        <Menu.Item key="setting:2">Option 2</Menu.Item>
-        <Menu.Item key="setting:3">Option 3</Menu.Item>
-        <Menu.Item key="setting:4">Option 4</Menu.Item>
+        <Menu.Item key="setting:2">
+          <Link to="/Mens/shirts">Shirts</Link>
+        </Menu.Item>
+        <Menu.Item key="setting:3">
+          <Link to="/Mens/tshirts">T-Shirts</Link>
+        </Menu.Item>
+        <Menu.Item key="setting:4">
+          <Link to="/Mens/shoes">Shoes</Link>
+        </Menu.Item>
       </SubMenu>
       <SubMenu
         title={

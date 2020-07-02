@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { FaCode } from "react-icons/fa";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getProducts } from "../../../_actions/product_action";
+import { getMensTshirts } from "../../../../_actions/product_action";
 import { Icon, Row, Col, Card, Spin } from "antd";
-import RadioBox from "../RadioBox/RadioBox";
-import SearchBox from "../Search/Search";
-import Price from '../RadioBox/PriceData'
+import RadioBox from "../../RadioBox/RadioBox";
+import SearchBox from "../../Search/Search";
+import { ShoppingOutlined } from "@ant-design/icons";
+import Price from '../../RadioBox/PriceData'
 
 import { Link } from 'react-router-dom'
 
 const { Meta } = Card;
 
-const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, getProducts }) => {
+const MensTshirtsPage = ({ product: { MensTshirts, loading, Skip, Limit, postSize }, getMensTshirts }) => {
   // const [Skip, setSkip] = useState(0);
   // const [Limit, setLimit] = useState(8);
   const [Products, setProducts] = useState([]);
@@ -27,13 +28,13 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
 
   };
   useEffect(() => {
-    getProducts(variable);
-  }, [getProducts]);
+    getMensTshirts(variable);
+  }, [getMensTshirts]);
 
 
   useEffect(() => {
-    setProducts(products);
-  }, [products]);
+    setProducts(MensTshirts);
+  }, [MensTshirts]);
 
 
   const onLoad = (e) => {
@@ -42,7 +43,7 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
       skip: Skip,
       limit: Limit
     }
-    getProducts(variable);
+    getMensTshirts(variable);
   };
 
   const showFilterResults = (filters) => {
@@ -51,7 +52,7 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
       limit: Limit,
       filters: filters,
     };
-    getProducts(variable);
+    getMensTshirts(variable);
     // setSkip(0);
   };
   // console.log(Price)
@@ -92,15 +93,15 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
     // });
     // setSearchItems(newSearchItems)
     // const products = products;
-    console.log("products", products)
-    const filtereditem = products.filter((p) =>
+    // console.log("products", products)
+    const filtereditem = MensTshirts.filter((p) =>
       p.title.toLowerCase().includes(newSearchItems.toLowerCase())
     );
     // console.log("item", filtereditem);
     // this.setState({
     //   todos: filtereditem,
     // });
-    // getProducts(filtereditem)
+    // getMensTshirts(filtereditem)
     setProducts(filtereditem)
   }
   return (
@@ -136,44 +137,54 @@ const LandingPage = ({ product: { products, loading, Skip, Limit, postSize }, ge
           <div>
             <Row gutter={[16, 16]}>{Products.map((product, index) => (
               <Col lg={6} md={8} sm={12} xs={12}>
-                <Link to={`/${product.category}/${product.subcategory}/${product.title}/${product._id}`}>
-                  <Card
-                    hoverable={true}
-                    loading={product.images ? false : true}
-                    cover={
+                <Card
+                  hoverable={true}
+                  loading={product.images ? false : true}
+                  cover={
+                    <Link to={`/${product.category}/${product.subcategory}/${product.title}/${product._id}`}>
+
                       <img
                         src={`http://localhost:5000/${product.images[0]}`}
                         alt="product image"
                         style={{ width: "100%", maxHeight: "400px", height: "400px" }}
                       />
-                    }
-                    bordered={true}
-                  >
-                    <Meta title={product.title} description={
+                    </Link>
+                  }
+                  bordered={true}
+                >
+                  <Meta title={product.title} description={
+                    <div style={{ display: 'flex' }}>
                       <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black' }}>{'PKR ' + product.price}</span>
-                    }></Meta>
+                      <div> 
+                        <ShoppingOutlined style={{
+                          marginLeft: '9rem',
+                          fontSize: '25px',
+                        }} />
+                      </div>
+                    </div>
+                  }></Meta>
 
-                  </Card>
-                </Link>
+                </Card>
               </Col>
             ))}</Row>
           </div>
 
           <br />
           <br />
-          {products.length <= 48 ?
+          {/* {MensTshirts.length <= 48 ?
             <div style={{ display: "flex", justifyContent: "center" }}>
               <button onClick={(e) => onLoad(e)}>Load more...</button>
             </div> : <div style={{ display: "flex", justifyContent: "center" }}>No more Products...</div>
-          }</div>
+          } */}
+          </div>
 
       }
     </div>
   );
 };
 
-LandingPage.propTypes = {
-  getProducts: PropTypes.func.isRequired,
+MensTshirtsPage.propTypes = {
+  getMensTshirts: PropTypes.func.isRequired,
   product: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -183,4 +194,4 @@ const mapStateToProps = (state) => ({
   product: state.product,
   user: state.user,
 });
-export default connect(mapStateToProps, { getProducts })(LandingPage);
+export default connect(mapStateToProps, { getMensTshirts })(MensTshirtsPage);

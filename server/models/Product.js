@@ -27,7 +27,8 @@ const productSchema = mongoose.Schema(
     subcategory: {
       type: String,
     },
-
+    size: { type: String },
+    units: { type: String },
     sold: {
       type: Number,
       maxlength: 100,

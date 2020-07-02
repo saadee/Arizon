@@ -72,7 +72,7 @@
   .addCart-btn{
     background-color: black;
     color: white;
-    width: 150%;
+    width: 500px;
     padding: 1rem auto;
     height: 70px;
     border: 1px solid black;
@@ -99,7 +99,7 @@
   .addWishList-btn{
     background-color: white;
     color: black;
-    width: 150%;
+    width: 500px;
     padding: 1rem auto;
     height: 70px;
     cursor: pointer;
@@ -111,22 +111,34 @@
     border:2px solid lightgreen;
     color: lightgreen;
   }
+  .item_pricing_details{
+    /* border:1px solid red; */
+    max-width: 500px;
+  }
+
+
+
+
+
   @media only screen and (max-width: 740px) {
     .productDetailWrapperDiv{
       /* margin: 2rem auto; */
       border: 1px solid red;
-      width: 100vw;
+      width: 100%;
     }
     .imageDiv{
       display: block;
       margin: 0;
     }
     .productImageDiv{
+      border:1px solid black;
+      width:100%;
       margin-bottom: -10rem;
       padding-bottom: -2rem;
 
       
     }
+
     .productImages{
       margin: 2rem;
     }
@@ -154,18 +166,10 @@
     }
   
   }
-  @media (max-width:600px){
-    .productDetailWrapperDiv{
-      /* margin: 2rem auto; */
-      border: 1px solid green;
-      width: 100%;
-    }
 
- 
-    
-    .addCart-btn{
-      width:'400px';
-      margin-left: 0%;
-      text-align: center;
-    }
-  }
+
+
+
+
+
+  

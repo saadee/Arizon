@@ -1,62 +1,74 @@
-import React from 'react'
-import './cart.css'
-import { Table, Empty } from 'antd'
-import { connect } from 'react-redux'
+import React from "react";
+import "./cart.css";
+import { Empty, Button } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
+import { connect } from "react-redux";
+import { delFromCart } from "../../../_actions/product_action";
+import { Link } from "react-router-dom";
 
-
-function Cart(props) {
-    const images = props.cart.images
-    const columns = [
-        {
-            title: 'Image',
-            dataIndex: `http://localhost:5000/${props.cart.images ? props.cart.images : ''}`,
-            key: 'image',
-        },
-        {
-            title: 'Title',
-            dataIndex: 'title',
-            key: 'title',
-        },
-        {
-            title: 'Price',
-            dataIndex: 'price',
-            key: 'price',
-        },
-        {
-            title: 'Category',
-            dataIndex: 'category',
-            key: 'Category',
-        },
-    ];
-
-    return props.cart == null ?
-        <div><Empty />
-        </div> :
-        (
-            <div style={{ margin: '1rem auto' }}>
-                <div style={{ marginLeft: '20px' }}>
-                    <h1>Shopping Cart</h1>
-                </div>
-                <hr />
-                <div style={{ margin: '3rem auto', textAlign: 'center', border: '1px solid red' }}>
-                    {props.cart.map((product) => (
-                        <div style={{display:'flex'}}>
-                            <div style={{ width: '30%', height: '20%' }}>
-                                <img src={product.images[0]} alt="" style={{
-                                    width: '30%',
-                                }} />
-                            </div>
-                            <div>{product.title}</div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
+function Cart({ delFromCart, cart }) {
+  const onDelCartItem = (e) => {
+    console.log(e);
+    delFromCart(e);
+  };
+  return cart == null ? (
+    <div>
+      <Empty />
+    </div>
+  ) : (
+    <div style={{ margin: "1rem auto" }}>
+      <div style={{ marginLeft: "20px" }}>
+        <h1>Shopping Cart</h1>
+      </div>
+      <div>
+        <table className="cartTable">
+          <th className="cartTableHead">Item</th>
+          <th className="cartTableHead">Price</th>
+          <th className="cartTableHead">Size</th>
+          <th className="cartTableHead">Units</th>
+          <th className="cartTableHead"></th>
+          {cart.map((product) => (
+            <tr className="cartTableRow">
+              <td className="cartTableData" style={{ width: "30%" }}>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to={`/${product.category}/${product.subcategory}/${product.title}/${product._id}`}
+                >
+                  <div style={{ display: "flex" }}>
+                    <div style={{ textAlign: "center", width: "fit-content" }}>
+                      <img
+                        src={product.images[0]}
+                        alt=""
+                        style={{
+                          width: "30%",
+                        }}
+                      />
+                    </div>
+                    <div style={{ textAlign: "left" }}>{product.title}</div>
+                  </div>
+                </Link>
+              </td>
+              <td className="cartTableData">{product.price}</td>
+              <td className="cartTableData">{product.size}</td>
+              <td className="cartTableData">{product.units}</td>
+              <td className="cartTableData">
+                <Button
+                  style={{ backgroundColor: "black", color: "white" }}
+                  onClick={(e) => onDelCartItem(product._id)}
+                >
+                  <CloseOutlined />
+                  Remove
+                </Button>
+              </td>
+              <hr />
+            </tr>
+          ))}
+        </table>
+      </div>
+    </div>
+  );
 }
 const mapStateToProps = (state) => ({
-    cart: state.cart.cartItems,
+  cart: state.cart.cartItems,
 });
-export default connect(mapStateToProps)(Cart)
+export default connect(mapStateToProps, {delFromCart})(Cart);

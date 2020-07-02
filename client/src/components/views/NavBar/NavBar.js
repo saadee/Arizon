@@ -27,7 +27,7 @@ function NavBar(props) {
         position: "fixed",
         zIndex: 5,
         width: "100%",
-        height: "10%",
+        height: "8%",
         overflowY: "hidden",
       }}
     >
@@ -36,7 +36,7 @@ function NavBar(props) {
         onClick={showDrawer}
         style={{ float: "left", marginRight: "20px" }}
       >
-        <img src={more} style={{ width: "100%" }} />
+        <img  src={more} style={{ width: "100%" }} />
       </Button>
 
       <div
@@ -44,10 +44,11 @@ function NavBar(props) {
         style={{ textAlign: "left", marginLeft: "0px" }}
       >
         <a href="/">
-          <img
+          <img 
+          className='siteLogo'
             src={logo}
             alt=""
-            style={{ width: "100%", height: "50px", marginTop: "-10px" }}
+            style={{ width: "100%", height: "90px", marginTop: "-33px" }}
           />
         </a>
       </div>
@@ -62,11 +63,11 @@ function NavBar(props) {
         <div style={{ float: "right" }}>
           <Menu>
             <Menu.Item key="app" style={{ marginTop: "6px" }}>
-              <a href="/cart" style={{ textDecoration: "none" }}>
+              <Link to="/cart" style={{ textDecoration: "none" }}>
                 <Badge count={props.cart.cartItems.length}>
                   <ShoppingCartOutlined style={{ fontSize: "30px" }} />
                 </Badge>
-              </a>
+              </Link>
             </Menu.Item>
           </Menu>
         </div>

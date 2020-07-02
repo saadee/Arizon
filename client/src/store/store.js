@@ -7,10 +7,14 @@ import promiseMiddleware from "redux-promise";
 import { persistStore } from "redux-persist";
 const intialState = {};
 const middleware = [thunk];
-export const store = createStore(
+
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, thunk)(createStore);
+
+export const store = createStoreWithMiddleware(
   rootReducer,
   intialState,
-  composeWithDevTools(applyMiddleware(...middleware, promiseMiddleware))
+  window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export const persistor = persistStore(store);

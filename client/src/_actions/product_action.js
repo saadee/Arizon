@@ -42,15 +42,63 @@ export const UploadProduct = ({
     alert("Failed!! retry");
   }
 };
-// get posts
 
-export const getProducts = (variable) => async (dispatch) => {
- 
+// Get Men's Denim
+
+export const getMensDenim = (variable) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/product/getProducts", variable);
+    const res = await axios.post("/api/product/getMensDenim", variable);
 
     dispatch({
-      type: "GET_PRODUCTS",
+      type: "GET_MENS_DENIM",
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: "POSTS_ERR",
+      payload: { msg: err.message },
+    });
+  }
+};// Get Men's Shirts
+
+export const getMensShirts = (variable) => async (dispatch) => {
+  try {
+    const res = await axios.post("/api/product/getMensShirts", variable);
+
+    dispatch({
+      type: "GET_MENS_SHIRTS",
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: "POSTS_ERR",
+      payload: { msg: err.message },
+    });
+  }
+};// Get Men's T-shirts
+
+export const getMensTshirts = (variable) => async (dispatch) => {
+  try {
+    const res = await axios.post("/api/product/getMensTshirts", variable);
+
+    dispatch({
+      type: "GET_MENS_TSHIRTS",
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: "POSTS_ERR",
+      payload: { msg: err.message },
+    });
+  }
+};// Get Men's Shoes
+
+export const getMensShoes = (variable) => async (dispatch) => {
+  try {
+    const res = await axios.post("/api/product/getMensShoes", variable);
+
+    dispatch({
+      type: "GET_MENS_SHOES",
       payload: res.data,
     });
   } catch (err) {
@@ -63,32 +111,48 @@ export const getProducts = (variable) => async (dispatch) => {
 
 // get post bu id
 export const getProduct = (id) => async (dispatch) => {
-	try {
-		const res = await axios.get(`/api/product/${id}`);
+  try {
+    const res = await axios.get(`/api/product/${id}`);
 
-		dispatch({
-			type: 'GET_PRODUCT',
-			payload: res.data,
-		});
-	} catch (err) {
-		dispatch({
-			type: 'POSTS_ERR',
-			payload: { msg: err.message },
-		});
-	}
+    dispatch({
+      type: "GET_PRODUCT",
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: "POSTS_ERR",
+      payload: { msg: err.message },
+    });
+  }
 };
-export const addToCart = (id) => async (dispatch) => {
-	try {
-		const res = await axios.get(`/api/product/${id}`);
+export const addToCart = (variable) => async (dispatch) => {
+  const { id} = variable;
+  try {
+    const res = await axios.post(`/api/product/${id}`,variable);
 
-		dispatch({
-			type: 'ADD_TO_CART',
-			payload: res.data,
-		});
-	} catch (err) {
-		dispatch({
-			type: 'POSTS_ERR',
-			payload: { msg: err.message },
-		});
-	}
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: "CART_ERR",
+      payload: { msg: err.message },
+    });
+  }
+};
+export const delFromCart = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/product/${id}`);
+
+    dispatch({
+      type: "DEL_FROM_CART",
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: "POSTS_ERR",
+      payload: { msg: err.message },
+    });
+  }
 };
