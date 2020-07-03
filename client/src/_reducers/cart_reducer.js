@@ -28,6 +28,7 @@ export default function (state = initialState, action) {
 
       return {
         ...state,
+        
         // cartItems: state.cartItems.filter((post) => post._id !== payload),
 
         loading: false,

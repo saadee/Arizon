@@ -1,6 +1,6 @@
 import React from "react";
 import "./cart.css";
-import { Empty, Button } from "antd";
+import { Empty, Button, message } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { delFromCart } from "../../../_actions/product_action";
@@ -10,7 +10,13 @@ function Cart({ delFromCart, cart }) {
   const onDelCartItem = (e) => {
     console.log(e);
     delFromCart(e);
+    const key = "updatable";
+    message.loading({ content: "Updating Item to Cart...", key });
+    setTimeout(() => {
+      message.success({ content: "Cart Updated!", key, duration: 2 });
+    }, 1000);
   };
+
   return cart == null ? (
     <div>
       <Empty />
@@ -48,13 +54,14 @@ function Cart({ delFromCart, cart }) {
                   </div>
                 </Link>
               </td>
-              <td className="cartTableData">{product.price}</td>
+              <td className="cartTableData">{product.units*product.price}</td>
               <td className="cartTableData">{product.size}</td>
               <td className="cartTableData">{product.units}</td>
               <td className="cartTableData">
                 <Button
                   style={{ backgroundColor: "black", color: "white" }}
-                  onClick={(e) => onDelCartItem(product._id)}
+                  onClick={(e) => onDelCartItem(product._id)
+                  }
                 >
                   <CloseOutlined />
                   Remove
@@ -71,4 +78,4 @@ function Cart({ delFromCart, cart }) {
 const mapStateToProps = (state) => ({
   cart: state.cart.cartItems,
 });
-export default connect(mapStateToProps, {delFromCart})(Cart);
+export default connect(mapStateToProps, { delFromCart })(Cart);

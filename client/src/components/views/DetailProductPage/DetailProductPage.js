@@ -87,6 +87,7 @@ function DetailProductPage({
     };
     console.log(variable);
     addToCart(variable);
+    
     const key = "updatable";
     message.loading({ content: "Adding Item to Cart...", key });
     setTimeout(() => {

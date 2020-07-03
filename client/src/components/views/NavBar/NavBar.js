@@ -62,7 +62,7 @@ function NavBar(props) {
         </div>
         <div style={{ float: "right" }}>
           <Menu>
-            <Menu.Item key="app" style={{ marginTop: "6px" }}>
+            <Menu.Item key={0} style={{ marginTop: "6px" }}>
               <Link to="/cart" style={{ textDecoration: "none" }}>
                 <Badge count={props.cart.cartItems.length}>
                   <ShoppingCartOutlined style={{ fontSize: "30px" }} />
