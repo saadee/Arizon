@@ -6,7 +6,7 @@ import MensDenim from "./views/Pages/Mens/MenDenimPage";
 import MensShirts from "./views/Pages/Mens/MensShirts";
 import MensTshirts from "./views/Pages/Mens/MensTshirts";
 import MensShoes from "./views/Pages/Mens/MensShoes";
-import HomePage from "./views/HomePage/HomePage";
+import HomePage from "./views/HomePage/HomePage"; 
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
@@ -15,11 +15,12 @@ import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
 import CartPage from "./views/Cart/Cart";
 import AboutPage from "./views/Cart/About";
+import {connect} from 'react-redux'
 //null   Anyone Can go inside
 //true   only logged in user can go inside
 //false  logged in user can't go inside
 
-function App() {
+const App=()=> {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
@@ -55,4 +56,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect()(App);

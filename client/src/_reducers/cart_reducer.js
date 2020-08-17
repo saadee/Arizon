@@ -15,19 +15,26 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case "DEL_FROM_CART":
-      let updateItems = state.cartItems.concat(!payload);
-
-      let targetcartItems = state.cartItems.find((items) => {
-        return items.description == payload.description
-    })
-    if (targetcartItems) {
-        let getIndex=state.cartItems.indexOf(targetcartItems);
+      
+    //   let targetcartItems = state.cartItems.find((items) => {
+    //     return items.description == payload.description
+    // })
+    // if (targetcartItems) {
+    //     let getIndex=state.cartItems.indexOf(targetcartItems);
+    //     state.cartItems.splice(getIndex,1);
+    // }
+    let targetcartItem;
+    for(let i=0 ; i<=state.cartItems.length;i++){
+      if(state.cartItems[i].description === payload.description){
+        
+        let getIndex=state.cartItems.indexOf(state.cartItems[i]);
         state.cartItems.splice(getIndex,1);
+      }
     }
-    // return state;
-
+    
       return {
         ...state,
+        cartItems:state.cartItems,
         
         // cartItems: state.cartItems.filter((post) => post._id !== payload),
 

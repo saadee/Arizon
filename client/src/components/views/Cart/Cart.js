@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import "./cart.css";
 import { Empty, Button, message } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
@@ -6,7 +6,12 @@ import { connect } from "react-redux";
 import { delFromCart } from "../../../_actions/product_action";
 import { Link } from "react-router-dom";
 
-function Cart({ delFromCart, cart }) {
+const Cart = ({ delFromCart, cart }) => {
+
+  console.log(cart)
+
+  const [mainCart , setMainCart]=useState(cart);
+  console.log(mainCart)
   const onDelCartItem = (e) => {
     console.log(e);
     delFromCart(e);
@@ -17,7 +22,7 @@ function Cart({ delFromCart, cart }) {
     }, 1000);
   };
 
-  return cart == null ? (
+  return cart === null ? (
     <div>
       <Empty />
     </div>
@@ -33,7 +38,8 @@ function Cart({ delFromCart, cart }) {
           <th className="cartTableHead">Size</th>
           <th className="cartTableHead">Units</th>
           <th className="cartTableHead"></th>
-          {cart.map((product) => (
+          {mainCart && mainCart.map((product) => (
+            
             <tr className="cartTableRow">
               <td className="cartTableData" style={{ width: "30%" }}>
                 <Link
@@ -54,14 +60,13 @@ function Cart({ delFromCart, cart }) {
                   </div>
                 </Link>
               </td>
-              <td className="cartTableData">{product.units*product.price}</td>
+              <td className="cartTableData">{product.units * product.price}</td>
               <td className="cartTableData">{product.size}</td>
               <td className="cartTableData">{product.units}</td>
               <td className="cartTableData">
                 <Button
                   style={{ backgroundColor: "black", color: "white" }}
-                  onClick={(e) => onDelCartItem(product._id)
-                  }
+                  onClick={(e) => onDelCartItem(product._id)}
                 >
                   <CloseOutlined />
                   Remove
@@ -74,8 +79,12 @@ function Cart({ delFromCart, cart }) {
       </div>
     </div>
   );
-}
+};
 const mapStateToProps = (state) => ({
   cart: state.cart.cartItems,
 });
-export default connect(mapStateToProps, { delFromCart })(Cart);
+export default connect(function(state){
+  return{
+    cart:state.cart.cartItems
+  }
+}, { delFromCart })(Cart);

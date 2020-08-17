@@ -9,7 +9,7 @@ import more from "./more.png";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-function NavBar(props) {
+const  NavBar=({cart})=> {
   const [visible, setVisible] = useState(false);
 
   const showDrawer = () => {
@@ -64,7 +64,7 @@ function NavBar(props) {
           <Menu>
             <Menu.Item key={0} style={{ marginTop: "6px" }}>
               <Link to="/cart" style={{ textDecoration: "none" }}>
-                <Badge count={props.cart.cartItems.length}>
+                <Badge count={cart.cartItems && cart.cartItems.length}>
                   <ShoppingCartOutlined style={{ fontSize: "30px" }} />
                 </Badge>
               </Link>
